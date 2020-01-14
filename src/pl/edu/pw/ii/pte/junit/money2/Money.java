@@ -38,21 +38,18 @@ class Money {
 
     //ZADANIE A PUNKT 2
     public Money addSomeCurrency(Money inputMoney) {
-
         Money inputMoneySameCurrency = changeCurrencyToCurrent(currency(), inputMoney);
 
         return new Money(amount() + inputMoneySameCurrency.amount(), currency());
     }
 
     public Money subtractSomeCurrency(Money inputMoney) {
-
         Money inputMoneySameCurrency = changeCurrencyToCurrent(currency(), inputMoney);
 
         return new Money(amount() - inputMoneySameCurrency.amount(), currency());
     }
 
     private Money changeCurrencyToCurrent(CurrencyType currentCurrencyType, Money inputMoney) {
-
         CurrencyType inputCurrencyCode = inputMoney.currency();
         double inputCurrencyValue = inputMoney.fAmount;
 
@@ -94,5 +91,15 @@ class Money {
         return conversionFactor;
     }
 
+    public String compareTwoDifferentCurrencyAmount(Money moneyOne, Money moneyTwo){
+        Money moneyTwoSameCurrencyAsOne = changeCurrencyToCurrent(moneyOne.currency(), moneyTwo);
+
+        if(Double.compare(moneyOne.fAmount, moneyTwoSameCurrencyAsOne.fAmount)==0){
+            return "Obie kwoty są takie same";
+        } else if (Double.compare(moneyOne.fAmount, moneyTwoSameCurrencyAsOne.fAmount)<0){
+            return "Druga kwota jest wieksza";
+        } else
+            return "Pierwsza kwota jest wieksza";
+    }
 
 }

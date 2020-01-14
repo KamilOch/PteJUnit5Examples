@@ -130,6 +130,7 @@ public class MoneyAddingDifferentCurrencyTest {
         //then
         assertEquals(expected.amount(),result.amount());
     }
+
     @Test
     public void addingDifferentCurrencyCaseEURPlusCHF(){
         //given
@@ -165,6 +166,7 @@ public class MoneyAddingDifferentCurrencyTest {
         //then
         assertEquals(expected.amount(),result.amount());
     }
+
     @Test
     public void addingDifferentCurrencyCaseUSDPlusCHF(){
         //given
@@ -177,7 +179,6 @@ public class MoneyAddingDifferentCurrencyTest {
         assertEquals(expected.amount(),result.amount());
     }
 
-    /////////////////////////////////////////
     @Test
     public void addingDifferentCurrencyCaseCHFPlusPLN(){
         //given
