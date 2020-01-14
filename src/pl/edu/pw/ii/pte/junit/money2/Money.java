@@ -36,7 +36,6 @@ class Money {
         return new Money(this.fAmount * multiplier, this.currency());
     }
 
-
     //ZADANIE A PUNKT 2
     public Money addSomeCurrency(Money inputMoney) {
 
@@ -45,19 +44,25 @@ class Money {
         return new Money(amount() + inputMoneySameCurrency.amount(), currency());
     }
 
+    public Money subtractSomeCurrency(Money inputMoney) {
+
+        Money inputMoneySameCurrency = changeCurrencyToCurrent(currency(), inputMoney);
+
+        return new Money(amount() - inputMoneySameCurrency.amount(), currency());
+    }
 
     private Money changeCurrencyToCurrent(CurrencyType currentCurrencyType, Money inputMoney) {
 
         CurrencyType inputCurrencyCode = inputMoney.currency();
         double inputCurrencyValue = inputMoney.fAmount;
-        //
+
         double conversionFactor = useOfficialConversionValue(currentCurrencyType, inputCurrencyCode);
 
         return new Money(inputCurrencyValue * conversionFactor, currentCurrencyType);
     }
 
     private static double useOfficialConversionValue(CurrencyType currentCurrencyType, CurrencyType inputCurrencyCode) {
-        double conversionFactor;
+        double conversionFactor =0;
         //TODO make separate map ?????
         if (currentCurrencyType == inputCurrencyCode) {
             conversionFactor = 1;
@@ -85,9 +90,7 @@ class Money {
             conversionFactor = 2;
         } else if (currentCurrencyType == CurrencyType.CHF && inputCurrencyCode == CurrencyType.USD) {
             conversionFactor = 1.5;
-        } else conversionFactor = 0;
-
-
+        }
         return conversionFactor;
     }
 
