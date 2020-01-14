@@ -1,15 +1,15 @@
 package pl.edu.pw.ii.pte.junit.money2;
 
 class Money {
-    private int fAmount;
+    private double fAmount;
     private CurrencyType fCurrency;
 
-    public Money(int amount, CurrencyType currency) {
+    public Money(double amount, CurrencyType currency) {
         fAmount = amount;
         fCurrency = currency;
     }
 
-    public int amount() {
+    public double amount() {
         return fAmount;
     }
 
@@ -49,25 +49,44 @@ class Money {
     private Money changeCurrencyToCurrent(CurrencyType currentCurrencyType, Money inputMoney) {
 
         CurrencyType inputCurrencyCode = inputMoney.currency();
-        int inputCurrencyValue = inputMoney.fAmount;
+        double inputCurrencyValue = inputMoney.fAmount;
         //
-        int conversionFactor = useOfficialConversionValue(currentCurrencyType, inputCurrencyCode);
+        double conversionFactor = useOfficialConversionValue(currentCurrencyType, inputCurrencyCode);
 
         return new Money(inputCurrencyValue * conversionFactor, currentCurrencyType);
     }
 
-    private static int useOfficialConversionValue(CurrencyType currentCurrencyType, CurrencyType inputCurrencyCode) {
-        int conversionFactor = 0;
-
+    private static double useOfficialConversionValue(CurrencyType currentCurrencyType, CurrencyType inputCurrencyCode) {
+        double conversionFactor;
+        //TODO make separate map ?????
         if (currentCurrencyType == inputCurrencyCode) {
             conversionFactor = 1;
         } else if (currentCurrencyType == CurrencyType.PLN && inputCurrencyCode == CurrencyType.EUR) {
             conversionFactor = 4;
-        } else if(currentCurrencyType == CurrencyType.PLN && inputCurrencyCode == CurrencyType.USD){
-        	conversionFactor = 3;
-		}  else if (currentCurrencyType == CurrencyType.PLN && inputCurrencyCode == CurrencyType.CHF){
-        	conversionFactor = 2;
-        }
+        } else if (currentCurrencyType == CurrencyType.PLN && inputCurrencyCode == CurrencyType.USD) {
+            conversionFactor = 3;
+        } else if (currentCurrencyType == CurrencyType.PLN && inputCurrencyCode == CurrencyType.CHF) {
+            conversionFactor = 2;
+        } else if (currentCurrencyType == CurrencyType.EUR && inputCurrencyCode == CurrencyType.PLN) {
+            conversionFactor = 0.25;
+        } else if (currentCurrencyType == CurrencyType.EUR && inputCurrencyCode == CurrencyType.USD) {
+            conversionFactor = 0.9;
+        } else if (currentCurrencyType == CurrencyType.EUR && inputCurrencyCode == CurrencyType.CHF) {
+            conversionFactor = 0.5;
+        } else if (currentCurrencyType == CurrencyType.USD && inputCurrencyCode == CurrencyType.PLN) {
+            conversionFactor = 0.3;
+        } else if (currentCurrencyType == CurrencyType.USD && inputCurrencyCode == CurrencyType.EUR) {
+            conversionFactor = 1.1;
+        }  else if (currentCurrencyType == CurrencyType.USD && inputCurrencyCode == CurrencyType.CHF) {
+            conversionFactor = 0.6;
+        }  else if (currentCurrencyType == CurrencyType.CHF && inputCurrencyCode == CurrencyType.PLN) {
+            conversionFactor = 0.5;
+        } else if (currentCurrencyType == CurrencyType.CHF && inputCurrencyCode == CurrencyType.EUR) {
+            conversionFactor = 2;
+        } else if (currentCurrencyType == CurrencyType.CHF && inputCurrencyCode == CurrencyType.USD) {
+            conversionFactor = 1.5;
+        } else conversionFactor = 0;
+
 
         return conversionFactor;
     }

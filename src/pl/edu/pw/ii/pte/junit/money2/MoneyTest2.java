@@ -55,28 +55,4 @@ public class MoneyTest2 {
 
         assertTrue(expected.equals(result));
     }
-
-    // TESTY ZADANIE A PUNKT 2
-
-    @Test
-	public void addingDifferentCurrencyCasePLNToEUR() {
-		//given
-		Money startMoneyInPLN = new Money(10, CurrencyType.PLN);
-		Money moneyInEUR = new Money(1, CurrencyType.EUR);
-
-		Money expected = new Money(14, CurrencyType.PLN);
-		//when
-		Money result = startMoneyInPLN.addSomeCurrency(moneyInEUR);
-		//then
-		//assertTrue(expected.equals(result));
-
-		assertEquals(expected.amount(),result.amount());
-		// TODO do przemyslenia moze osobny test czy przy dodawaniu roznych walut, waluta poczatkowa sie nie zmienia??? a moze zostawic tak jak jest???
-		assertEquals(expected.currency(),result.currency());
-	}
-
-
-
-
-
 }
