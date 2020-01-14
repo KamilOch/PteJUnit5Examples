@@ -49,7 +49,7 @@ class Money {
         return new Money(amount() - inputMoneySameCurrency.amount(), currency());
     }
 
-    private Money changeCurrencyToCurrent(CurrencyType currentCurrencyType, Money inputMoney) {
+    private static Money changeCurrencyToCurrent(CurrencyType currentCurrencyType, Money inputMoney) {
         CurrencyType inputCurrencyCode = inputMoney.currency();
         double inputCurrencyValue = inputMoney.fAmount;
 
@@ -82,7 +82,7 @@ class Money {
         }  else if (currentCurrencyType == CurrencyType.USD && inputCurrencyCode == CurrencyType.CHF) {
             conversionFactor = 0.6;
         }  else if (currentCurrencyType == CurrencyType.CHF && inputCurrencyCode == CurrencyType.PLN) {
-            conversionFactor = 0.5;
+                conversionFactor = 0.5;
         } else if (currentCurrencyType == CurrencyType.CHF && inputCurrencyCode == CurrencyType.EUR) {
             conversionFactor = 2;
         } else if (currentCurrencyType == CurrencyType.CHF && inputCurrencyCode == CurrencyType.USD) {
@@ -91,7 +91,8 @@ class Money {
         return conversionFactor;
     }
 
-    public String compareTwoDifferentCurrencyAmount(Money moneyOne, Money moneyTwo){
+    //ZADANIE A PUNKT 3
+    public static String compareTwoDifferentCurrencyAmount(Money moneyOne, Money moneyTwo){
         Money moneyTwoSameCurrencyAsOne = changeCurrencyToCurrent(moneyOne.currency(), moneyTwo);
 
         if(Double.compare(moneyOne.fAmount, moneyTwoSameCurrencyAsOne.fAmount)==0){
